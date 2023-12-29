@@ -1,0 +1,41 @@
+﻿@model IEnumerable<DoctorClinicApplication.Models.Doctor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    #docDiv
+    {
+        float:left;
+        position:relative;
+        margin:5px;
+    }
+</style>
+
+<h3>Doctors' List</h3>
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@foreach(var item in Model)
+{
+    <div class="card" id ="docDiv" style="width: 18rem;">
+        <img class="card-img-top" style="width:200px; height:200px;" src="@item.Pic" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <p class="card-text">With @item.Experience years of experiance in @item.Speciality.</p>
+            <a href="../BookAppointments/@item.Id" class="btn btn-primary">Book Appointment</a>
+            @Html.ActionLink("Details", "Details", new { id=item.Id})
+            @Html.ActionLink("Update Speciality", "Update", new { id=item.Id})
+        </div>
+    </div>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
